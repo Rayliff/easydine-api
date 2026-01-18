@@ -6,6 +6,16 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // [DITAMBAH] ENABLE CORS
+  app.enableCors({
+    origin: [
+      'http://localhost:3000', // frontend local
+      // 'https://frontend-kamu.vercel.app', // nanti kalau deploy
+    ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+  
   // Global Validation
   app.useGlobalPipes(
     new ValidationPipe({
